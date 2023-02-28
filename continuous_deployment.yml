@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: checkout code
+      git:
+        repo: https://github.com/benthomasson/ci-cd-ee
+        dest: /tmp/deploy-ee
+        update: true
+        force: true
+    - name: set sha for ansible-events
+      lineinfile:
+        path: "/tmp/deploy-ee/requirements.txt"
+        line: "git+https://github.com/benthomasson/ansible-events.git@{{event.after}}#egg=ansible-events"
+    - name: build with ansible-builder
+      shell:
+        cmd: ansible-builder build --tag quay.io/bthomass/events-demo-ci-cd:latest --container-runtime docker
+        chdir: /tmp/deploy-ee/
+    - name: stop cicd
+      shell:
+        cmd: docker stop cicd
