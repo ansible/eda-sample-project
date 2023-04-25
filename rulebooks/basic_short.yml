@@ -12,7 +12,7 @@
       condition: event.i == 8
       action:
         run_job_template:
-          organization: default
+          organization: Default
           name: run_basic
           job_args:
             fake_execution_time: "5"
