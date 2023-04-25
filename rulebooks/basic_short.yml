@@ -1,0 +1,18 @@
+---
+# Basic rulebook with job template, 
+# to be used with https://github.com/Alex-Izquierdo/eda-awx-project-sample
+- name: Basic short
+  hosts: all
+  sources:
+    - ansible.eda.range:
+        limit: 10
+        delay: 0.5
+  rules:
+    - name: Run JT at 8
+      condition: event.i == 8
+      action:
+        run_job_template:
+          organization: default
+          name: run_basic
+          job_args:
+            fake_execution_time: "5"
