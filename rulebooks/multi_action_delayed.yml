@@ -1,0 +1,19 @@
+- name: Multi action with delay
+  hosts: all
+  sources:
+    - ansible.eda.range:
+        limit: 5
+
+  rules:
+    - name: Greetings with delay
+      condition: event.i == 1
+      actions:
+        - debug:
+            msg: "Good morning"
+        - run_job_template:
+            organization: Default
+            name: run_basic
+            job_args:
+              fake_execution_time: "3"
+        - debug:
+            msg: "Good night"
