@@ -15,4 +15,5 @@
           organization: Default
           name: run_basic
           job_args:
-            fake_execution_time: "5"
+            extra_vars:
+              fake_execution_time: "5"
