@@ -1,0 +1,18 @@
+---
+- name: Run a webhook listener service
+  hosts: all
+  sources:
+    - ansible.eda.webhook:
+        host: "{{ WH_HOST | default('localhost') }}"
+        port: "{{ WH_PORT | default(5000) }}"
+  rules:
+    - name: Webhook event
+      condition: event.payload.ping == "pong"
+      action:
+        debug:
+          msg: "Webhook triggered!"
+
+    - name: Shutdown
+      condition: event.payload.shutdown is defined
+      action:
+        shutdown:
