@@ -1,0 +1,19 @@
+---
+- name: Long Running Range
+  hosts: all
+  sources:
+    - ansible.eda.range:
+        limit: 2592000 # 30 days
+        delay: 1
+  rules:
+    - name: Say Hello long running
+      # five seconds, five minutes, one hour, one day, one month
+      condition: >
+        event.i == 5
+        or event.i == 300
+        or event.i == 3600
+        or event.i == 86400
+        or event.i == 2591999
+      action:
+        debug:
+          msg: "Hello World!, event.i = {{ event.i }}"
