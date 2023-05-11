@@ -1,0 +1,21 @@
+--
+- name: Launch storm of JT's
+  hosts: all
+  sources:
+    - ansible.eda.range:
+        limit: 100
+  rules:
+    - name: "Run job template - storm mode"
+      condition: event.i < 101
+      actions:
+          - name: "Run job template - storm mode"
+            run_job_template:
+              name: run_basic
+              organization: Default
+              job_args:
+                extra_vars:
+                  fake_execution_time: "10" 
+
+          - name: "Print report"
+            debug:
+              msg: "JT launched? for {{ event.i }}"
