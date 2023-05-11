@@ -1,5 +1,5 @@
---
-- name: Launch storm of JT's
+---
+- name: "Launch storm of JT's"
   hosts: all
   sources:
     - ansible.eda.range:
@@ -14,7 +14,7 @@
             organization: Default
             job_args:
               extra_vars:
-                fake_execution_time: "10" 
+                fake_execution_time: "10"
 
         - name: "Print report"
           debug:
