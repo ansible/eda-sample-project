@@ -11,14 +11,12 @@
     - name: Run JT at 8
       condition: event.i == 8
       actions:
-        - name: "run job template basic short"
-          run_job_template:
+        - run_job_template:
             organization: Default
             name: run_basic
             job_args:
               extra_vars:
                 fake_execution_time: "5"
 
-        - name: "print report basic short"
-          debug:
+        - debug:
             msg: "Basic short rulebook, event {{ event.i }}"
