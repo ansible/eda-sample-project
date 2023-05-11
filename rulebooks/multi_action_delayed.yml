@@ -2,7 +2,8 @@
   hosts: all
   sources:
     - ansible.eda.range:
-        limit: 5
+        limit: 15
+        delay: 1
 
   rules:
     - name: Greetings with delay
@@ -14,6 +15,7 @@
             organization: Default
             name: run_basic
             job_args:
-              fake_execution_time: "3"
+              extra_vars:
+                fake_execution_time: "3"
         - debug:
             msg: "Good night"
