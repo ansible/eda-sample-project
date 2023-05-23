@@ -19,3 +19,9 @@
                 fake_execution_time: "3"
         - debug:
             msg: "Good night"
+        - run_job_template:
+            organization: Default
+            name: run_basic
+            job_args:
+              extra_vars:
+                fake_execution_time: "2"
