@@ -1,0 +1,29 @@
+---
+- name: Hello World with multiaction, multirule and shutdown
+  hosts: all
+  sources:
+    - ansible.eda.range:
+        limit: 10
+        delay: 2
+  rules:
+    - name: Set event
+      condition: event.i == 1
+      actions:
+        - debug:
+            msg: "One has come"
+        - print_event:
+            pretty: true
+        - post_event:
+            event:
+              say_hello: true
+
+    - name: Say Hello to everyone
+      condition: event.say_hello == true
+      actions:
+        - debug:
+            msg: "Hello everyone"
+        - print_event:
+            pretty: true
+        - shutdown:
+            message: "Bye bye"
+
