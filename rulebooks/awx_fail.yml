@@ -6,7 +6,7 @@
         limit: 10
         delay: 0.5
   rules:
-    - name: Run JT at 8
+    - name: Run fail JT at 8
       condition: event.i == 8
       action:
         run_job_template:
