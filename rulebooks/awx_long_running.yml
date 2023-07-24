@@ -3,7 +3,7 @@
   hosts: all
   sources:
     - ansible.eda.generic:
-        loop_count: 2592000
+        loop_count: 63072000 # two years
         loop_delay: 1
         event_delay: 5
         create_index: iteration
