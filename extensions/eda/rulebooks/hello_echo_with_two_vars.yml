@@ -22,4 +22,4 @@
       condition: event.i == 2
       action:
         debug:
-          msg: "{{ my_extra_msg }}"
+          msg: "Hello again {{ my_extra_msg }}"
