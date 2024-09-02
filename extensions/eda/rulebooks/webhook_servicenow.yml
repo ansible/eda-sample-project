@@ -1,0 +1,29 @@
+---
+- name: Run a webhook listener service for ServiceNow integration tests
+  hosts: all
+  sources:
+    - ansible.eda.webhook:
+  rules:
+    - name: ServiceNow Incident
+      condition: event.payload.number contains "INC"
+      action:
+        debug:
+          msg: "ServiceNow Incident received!"
+
+    - name: ServiceNow Problem
+      condition: event.payload.number contains "PRB"
+      action:
+        debug:
+          msg: "ServiceNow Problem received!"
+
+    - name: ServiceNow Catalog Request
+      condition: event.payload.number contains "REQ"
+      action:
+        debug:
+          msg: "ServiceNow Catalog Request received!"
+
+    - name: Shutdown
+      condition: event.payload.shutdown is defined
+      action:
+        shutdown:
+
