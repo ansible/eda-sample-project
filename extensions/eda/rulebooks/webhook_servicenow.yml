@@ -6,19 +6,19 @@
         port: 5005
   rules:
     - name: ServiceNow Incident
-      condition: event.payload.number contains "INC"
+      condition: event.payload.number is search("INC", ignorecase=false)
       action:
         debug:
           msg: "ServiceNow Incident received!"
 
     - name: ServiceNow Problem
-      condition: event.payload.number contains "PRB"
+      condition: event.payload.number is search("PRB", ignorecase=false)
       action:
         debug:
           msg: "ServiceNow Problem received!"
 
     - name: ServiceNow Catalog Request
-      condition: event.payload.number contains "REQ"
+      condition: event.payload.number is search("REQ", ignorecase=false)
       action:
         debug:
           msg: "ServiceNow Catalog Request received!"
@@ -27,4 +27,3 @@
       condition: event.payload.shutdown is defined
       action:
         shutdown:
-
