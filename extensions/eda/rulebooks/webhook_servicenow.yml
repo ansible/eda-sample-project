@@ -3,6 +3,7 @@
   hosts: all
   sources:
     - ansible.eda.webhook:
+        port: 5005
   rules:
     - name: ServiceNow Incident
       condition: event.payload.number contains "INC"
