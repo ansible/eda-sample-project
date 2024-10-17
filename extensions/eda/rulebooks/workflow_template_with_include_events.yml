@@ -1,0 +1,28 @@
+---
+- name: Test run workflow templates with include_events
+  hosts: all
+  sources:
+    - ansible.eda.range:
+        limit: 3
+        delay: 5
+  rules:
+    - name: "Run workflow template with default settings"
+      condition: event.i == 2
+      action:
+        run_workflow_template:
+          name: "{{ workflow_template_name }}"
+          organization: "{{ organization | default('Default') }}"
+    - name: "Run workflow template with include events set to True"
+      condition: event.i == 1
+      action:
+        run_workflow_template:
+          name: "{{ workflow_template_name }}"
+          include_events: True
+          organization: "{{ organization | default('Default') }}"
+    - name: "Run workflow template with include events set to False"
+      condition: event.i == 0
+      action:
+        run_workflow_template:
+          name: "{{ workflow_template_name }}"
+          include_events: False
+          organization: "{{ organization | default('Default') }}"
