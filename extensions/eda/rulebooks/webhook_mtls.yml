@@ -1,0 +1,19 @@
+---
+- name: Wilmas webhook rulebook with mTLS
+  hosts: all
+  sources:
+    - ansible.eda.webhook:
+        port: "{{ port | default('5555') }}"
+        certfile: "{{ eda.filename.certfile | default(None) }}"
+        keyfile:  "{{ eda.filename.keyfile | default(None) }}"
+        password: "{{ key_password | default(None) }}"
+        cafile: "{{ eda.filename.cafile | default(None) }}"
+  rules:
+    - name: Check if the name is Fred
+      condition: event.payload.name == "Fred"
+      action:
+        print_event:
+    - name: Check if the event contains shutdown
+      condition: event.payload.shutdown
+      action:
+        shutdown:
