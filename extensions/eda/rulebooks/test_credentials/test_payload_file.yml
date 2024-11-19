@@ -1,0 +1,19 @@
+---
+- name: Use payload file to check events (for testing only)
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        payload_file: "{{ eda.filename.test_payload_file }}"
+  rules:
+    - name: Rule1
+      condition: event.name == vars.friend1
+      action:
+        debug:
+    - name: Rule2
+      condition: event.name == vars.friend2
+      action:
+        debug:
+    - name: Rule3
+      condition: event.name == vars.friend3
+      action:
+        debug:
