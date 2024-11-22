@@ -1,0 +1,27 @@
+---
+- name: Check env vars before generating events (for testing only)
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        loop_count: 1
+        timestamp: true
+        create_index: i
+        check_env_vars:
+          MY_ENV1: abc
+          MY_ENV2: xyz
+        payload:
+          - message:
+              name: abc
+          - message:
+              name: xyz
+  rules:
+    - name: English comparison using dot notation
+      condition: event.message.name == "{{ MY_ENV2 }}"
+      action:
+         print_event:
+            pretty: True
+    - name: English comparison using square bracket accessor
+      condition: event.message["name"] == "{{ MY_ENV1 }}"
+      action:
+         print_event:
+            pretty: True
