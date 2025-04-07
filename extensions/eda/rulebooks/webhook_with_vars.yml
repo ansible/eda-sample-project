@@ -1,0 +1,20 @@
+---
+- name: Test webhook with extra vars
+  hosts: all
+  sources:
+    - name: webhook
+      ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5555
+  rules:
+    - name: rule1
+      condition: event.payload.username == "{{ username }}"
+      action:
+        debug:
+          msg: "Expected user is here"
+    - name: Shutdown
+      condition: event.payload.shutdown is defined
+      action:
+        shutdown:
+          
+
