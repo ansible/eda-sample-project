@@ -11,7 +11,7 @@
       condition: event.payload.username == "{{ username }}"
       action:
         debug:
-          msg: "Expected user is here"
+          msg: "User {{ username }} is here"
     - name: Shutdown
       condition: event.payload.shutdown is defined
       action:
