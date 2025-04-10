@@ -8,7 +8,7 @@
         port: 5555
   rules:
     - name: rule1
-      condition: event.payload.username == "{{ username }}"
+      condition: event.payload.username == vars.username
       action:
         debug:
           msg: "User {{ username }} is here"
