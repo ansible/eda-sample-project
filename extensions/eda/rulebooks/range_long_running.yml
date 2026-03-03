@@ -1,4 +1,5 @@
 ---
+# Modified for auto-restart E2E testing (different SHA from main)
 - name: Long Running Range
   hosts: all
   sources:
@@ -10,7 +11,7 @@
       # Gap increases exponentially the first day
       # then increases linearly after that
       # one time per day the first month
-      # after one time per month. 
+      # after one time per month.
       condition: >-
         event.i in [5, 30, 90, 300, 3600, 9000, 18000, 36000]
         or event.i in [86400,
