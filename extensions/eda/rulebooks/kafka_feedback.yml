@@ -1,0 +1,29 @@
+---
+- name: kafka feedback
+  hosts: all
+  sources:
+    - name: kafka_test
+      ansible.eda.kafka:
+        host: "{{ host | default('localhost') }}"
+        port: "{{ port | default('9092') }}"
+        encoding: "{{ encoding | default('utf-8') }}"
+        topic: "{{ topic | default('demo') }}"
+        group_id: "{{ group_id | default(None) }}"
+        offset: "{{ offset | default('latest') }}"
+        security_protocol: "{{ security_protocol | default('PLAINTEXT') }}"
+        sasl_mechanism: "{{ sasl_mechanism | default('PLAIN') }}"
+        sasl_plain_username: "{{ sasl_plain_username | default(None) }}"
+        sasl_plain_password: "{{ sasl_plain_password | default(None) }}"
+        cafile: "{{ cafile | default(None) }}"
+        check_hostname: "{{ check_hostname | default(None) }}"
+        verify_mode: "{{ verify_mode | default('CERT_NONE') }}"
+        feedback: true
+  rules:
+    - name: multi condition
+      condition:
+        all:
+          - event.body.id == 1
+          - event.body.id == 7
+          - event.body.id == 9
+      action:
+        debug:
