@@ -1,0 +1,27 @@
+---
+- name: kafka benchmark
+  hosts: all
+  sources:
+    - name: kafka_benchmark
+      ansible.eda.kafka:
+        host: "{{ host | default('localhost') }}"
+        port: "{{ port | default('9092') }}"
+        cafile: "{{ eda.filename.cafile | default(None) }}"
+        certfile: "{{ eda.filename.certfile | default(None) }}"
+        keyfile: "{{ eda.filename.keyfile | default(None) }}"
+        encoding: "{{ encoding | default('utf-8') }}"
+        topic: "{{ topic | default('benchmark') }}"
+        group_id: "{{ group_id | default('benchmark') }}"
+        offset: "{{ offset | default('earliest') }}"
+        security_protocol: "{{ security_protocol | default('PLAINTEXT') }}"
+        sasl_mechanism: "{{ sasl_mechanism | default('PLAIN') }}"
+        sasl_plain_username: "{{ sasl_plain_username | default(None) }}"
+        sasl_plain_password: "{{ sasl_plain_password | default(None) }}"
+        check_hostname: "{{ check_hostname | default(None) }}"
+        verify_mode: "{{ verify_mode | default('CERT_NONE') }}"
+        feedback: false
+  rules:
+    - name: consume all events
+      condition: event.body is defined
+      action:
+        none:
