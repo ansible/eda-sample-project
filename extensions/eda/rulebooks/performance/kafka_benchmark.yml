@@ -1,5 +1,7 @@
 ---
-- name: kafka benchmark
+# Kafka throughput benchmark — consumes all events from a Kafka topic
+# with no action to measure raw event-processing rate in EDA.
+- name: Kafka throughput benchmark
   hosts: all
   sources:
     - name: kafka_benchmark
