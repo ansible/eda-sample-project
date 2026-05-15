@@ -1,6 +1,6 @@
 ---
-# Kafka throughput benchmark — consumes all events from a Kafka topic
-# with no action to measure raw event-processing rate in EDA.
+# Kafka throughput benchmark — consumes events from a Kafka topic and
+# runs the Demo Job Template to measure realistic event-processing rate.
 - name: Kafka throughput benchmark
   hosts: all
   sources:
@@ -26,4 +26,6 @@
     - name: consume all events
       condition: event.body is defined
       action:
-        none:
+        run_job_template:
+          name: Demo Job Template
+          organization: Default
