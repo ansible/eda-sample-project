@@ -10,7 +10,7 @@
       condition: event.i == 0
       action:
         run_workflow_template:
-          name: workflow_basic_fail
+          name: "{{ override_workflow_basic_fail | default('workflow_basic_fail') }}"
           job_args:
             extra_vars:
               fake_execution_time: "2"

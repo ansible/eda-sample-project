@@ -18,7 +18,7 @@
             msg: "JT launched for #{{ event.index }}"
 
         - run_job_template:
-            name: run_basic
+            name: "{{ override_run_basic | default('run_basic') }}"
             organization: Default
             job_args:
               extra_vars:
