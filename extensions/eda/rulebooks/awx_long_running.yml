@@ -32,7 +32,7 @@
       actions:
         - run_job_template:
             organization: Default
-            name: run_basic
+            name: "{{ override_run_basic | default('run_basic') }}"
 
         - debug:
             msg: "Awx long running rulebook, event {{ event.iteration }}"

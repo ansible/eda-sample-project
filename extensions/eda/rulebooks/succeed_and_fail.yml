@@ -11,16 +11,16 @@
         actions:
           - run_job_template:
               organization: Default
-              name: run_basic
+              name: "{{ override_run_basic | default('run_basic') }}"
               job_args:
                 extra_vars:
                   fake_execution_time: '1'
           - run_job_template:
               organization: Default
-              name: fail_basic
+              name: "{{ override_fail_basic | default('fail_basic') }}"
           - run_job_template:
               organization: Default
-              name: run_basic
+              name: "{{ override_run_basic | default('run_basic') }}"
               job_args:
                 extra_vars:
                   fake_execution_time: '1'
