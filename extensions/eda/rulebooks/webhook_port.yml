@@ -5,6 +5,12 @@
     - ansible.eda.webhook:
         port: 5000
   rules:
+    - name: Webhook event echo payload
+      condition: event.payload.ping == "pong" and event.payload.echo_mode == "payload"
+      action:
+        debug:
+          msg: "{{ event.payload }}"
+
     - name: Webhook event
       condition: event.payload.ping == "pong"
       action:
