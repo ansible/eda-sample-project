@@ -17,6 +17,14 @@
         debug:
           msg: "Webhook triggered!"
 
+    - name: Emit activation log completion marker
+      condition: >-
+        event.payload.debug_marker is defined and
+        event.payload.completion_marker is defined
+      action:
+        print_event:
+          pretty: false
+
     - name: Shutdown
       condition: event.payload.shutdown is defined
       action:
